@@ -12,9 +12,10 @@ const Navbar: React.FC = () => {
         <Link
           href="/"
           aria-label="Home"
-          className="capitalize font-bold text-xl md:text-lg lg:text-xl text-white"
+          className="capitalize font-black tracking-wide text-center text-xl md:text-lg lg:text-xl text-white"
         >
-          Auto Wheels &amp; <br /> Exhaust
+          Auto Wheels &amp;{" "}
+          <br className="inline-block sm:hidden md:inline-block" /> Exhaust
         </Link>
 
         <DesktopMenu />
