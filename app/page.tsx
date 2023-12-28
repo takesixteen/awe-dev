@@ -1,8 +1,10 @@
+import Navbar from "@/components/navbar/Navbar";
 
 export default function Home() {
   return (
-    <main className="">
-      Wassup Big Dog
-    </main>
-  )
+    <>
+      <Navbar />
+      <main className="min-h-[200vh] bg-neutral-400">Wassup Big Dog</main>
+    </>
+  );
 }
