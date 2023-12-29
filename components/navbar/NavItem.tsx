@@ -5,8 +5,6 @@ import Link from "next/link";
 
 import { NAV_ITEMS } from "@/constants";
 
-import ServicesNavItem from "./ServicesNavItem";
-
 interface NavItemProps {
   navItem: (typeof NAV_ITEMS)[number];
   toggleServicesDropdown: () => void;

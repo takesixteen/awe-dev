@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { NAV_ITEMS } from "@/constants";
 
 import NavItem from "./NavItem";
-import ServicesNavItem from "./ServicesNavItem";
+import NavItemWithDropDown from "./NavItemWithDropDown";
 
 const NavItems: React.FC = () => {
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
@@ -27,7 +27,7 @@ const NavItems: React.FC = () => {
       {NAV_ITEMS.map((item) => {
         if (item.label === "Services") {
           return (
-            <ServicesNavItem
+            <NavItemWithDropDown
               key={item.label}
               navItem={item}
               toggleServicesDropdown={toggleServicesDropdown}
