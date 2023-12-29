@@ -22,6 +22,9 @@ const config = {
         sans: ["var(--font-gotham)", "Inter", "sans-serif"],
       },
       colors: {
+        brand: "#de211b",
+        special: "#230400",
+        grayBorder: "#494952",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -30,17 +33,6 @@ const config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          50: "#fff8cc",
-          100: "#fff4aa",
-          200: "#ffee80",
-          300: "#ffe855",
-          400: "#ffe32b",
-          500: "#fd0",
-          600: "#d4b800",
-          700: "#aa9300",
-          800: "#806f00",
-          900: "#554a00",
-          950: "#332c00",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -150,6 +142,10 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      height: {
+        "navbar-desktop": "var(--navbar-desktop-height)",
+        "navbar-mobile": "var(--navbar-mobile-height)",
       },
     },
   },
