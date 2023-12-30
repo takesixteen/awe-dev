@@ -10,7 +10,7 @@ type MobileNavItemProps = {
 };
 
 const MobileNavItem: React.FC<MobileNavItemProps> = ({ navItem }) => {
-  return <Link href={"#"} className="w-full block">{navItem.label}</Link>;
+  return <Link href={"#"} className="w-full block p-2 focus-visible:bg-white/10 transition-colors hover:bg-white/10 ">{navItem.label}</Link>;
 };
 
 export default MobileNavItem;
