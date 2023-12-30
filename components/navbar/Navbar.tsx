@@ -7,10 +7,10 @@ import HeaderInformation from "../HeaderInformation";
 
 const Navbar: React.FC = () => {
   return (
-    <nav>
+    <nav className="fixed top-0 w-full inset-x-0">
       <HeaderInformation />
 
-      <div className="relative h-navbar-desktop bg-special">
+      <div className="relative h-navbar-mobile md:h-navbar-desktop bg-special">
         <div className="master-container flex h-full items-center justify-between">
           {/* Business Name */}
           <Link
