@@ -2,26 +2,25 @@
 
 import React, { useState, useCallback } from "react";
 
-import { NAV_ITEMS, SERVICES_DATA } from "@/constants";
+import { NAV_ITEMS, SERVICES_DATA_SORTED } from "@/constants";
 
 import { ChevronLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import MobileNavItem from "./MobileNavItem";
-import MobileNavItemWithDropdown from "./MobileNavItemWithDropdown";
+import ContactInfo from "./CantactInfo";
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
 const MobileNavItems: React.FC = () => {
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
+
+  const closeDropdown = useCallback(() => {
+    setDropdownVisibility(false);
+  }, []);
 
   const toggleDropdownVisibility = useCallback(() => {
     setDropdownVisibility((prev) => !prev);
@@ -29,28 +28,41 @@ const MobileNavItems: React.FC = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className="flex flex-col items-end justify-center p-2 text-white transition-colors hover:bg-white/10 focus-visible:bg-white/10">
+      <SheetTrigger
+        onClick={closeDropdown}
+        className="flex flex-col items-end justify-center p-2 text-white transition-colors hover:bg-white/10 focus-visible:bg-white/10 md:hidden"
+        aria-label="Toggle Navigation"
+      >
         <div className="mb-1 h-0.5 w-6 bg-white"></div>
         <div className="mb-1 h-0.5 w-4 bg-white"></div>
         <div className="h-0.5 w-6 bg-white"></div>
       </SheetTrigger>
       <SheetContent
         showCloseIcon={!isDropdownVisible}
-        className="border-l-grayBorder bg-special px-[32px] pt-[40px]"
+        className="flex flex-col justify-between overflow-y-scroll border-l-grayBorder bg-special px-[32px] pt-[48px]"
       >
         {!isDropdownVisible ? (
-          //  {/* Navigation Items */}
-          <NavigationItems
-            isDropdownVisible={isDropdownVisible}
-            toggleDropdownVisibility={toggleDropdownVisibility}
-          />
+          // Navigation Items
+          <>
+            <NavigationItems
+              toggleDropdownVisibility={toggleDropdownVisibility}
+            />
+            {/* Contact Info */}
+            <SheetFooter>
+              <ContactInfo />
+            </SheetFooter>
+          </>
         ) : (
-          // {/* Services Dropdown */}
-          <div className="flex flex-col gap-y-12">
-            <Button onClick={toggleDropdownVisibility}>
-              <ChevronLeft />
-              <span>Back</span>
-            </Button>
+          // Services Dropdown
+          <div className="flex flex-col ">
+            <button
+              onClick={toggleDropdownVisibility}
+              className="flex w-full gap-x-1 p-1 text-white transition-colors mb-7 -ms-1"
+              aria-label="Go Back"
+            >
+              <ChevronLeft className="-translate-y-[1px] " />
+              <span className="ps-3 text-start">Back</span>
+            </button>
 
             <ServicesDropdown />
           </div>
@@ -61,12 +73,10 @@ const MobileNavItems: React.FC = () => {
 };
 
 type NavigationItemsProps = {
-  isDropdownVisible: boolean;
   toggleDropdownVisibility: () => void;
 };
 
 const NavigationItems: React.FC<NavigationItemsProps> = ({
-  isDropdownVisible,
   toggleDropdownVisibility,
 }) => {
   return (
@@ -74,16 +84,16 @@ const NavigationItems: React.FC<NavigationItemsProps> = ({
       {NAV_ITEMS.map((item) => (
         <li
           key={item.label}
-          className="w-full py-2 text-lg font-semibold capitalize text-white"
+          className="w-full border-b border-b-grayBorder text-lg font-semibold capitalize text-white"
         >
           {item.label === "Services" ? (
-            <MobileNavItemWithDropdown
+            <MobileNavItem
+              type="button"
               navItem={item}
-              isDropdownVisible={isDropdownVisible}
-              toggleDropdownVisibility={toggleDropdownVisibility}
+              onClick={toggleDropdownVisibility}
             />
           ) : (
-            <MobileNavItem navItem={item} />
+            <MobileNavItem type="link" navItem={item} />
           )}
         </li>
       ))}
@@ -94,12 +104,13 @@ const NavigationItems: React.FC<NavigationItemsProps> = ({
 const ServicesDropdown: React.FC = () => {
   return (
     <ul className="flex flex-col gap-y-2">
-      {SERVICES_DATA.map((item) => (
+      <h2 className="text-white p-2 text-start w-full mb-3 text-2xl font-medium">Services</h2>
+      {SERVICES_DATA_SORTED.map((item) => (
         <li
-          key={item.title}
-          className="w-full py-2 text-lg font-semibold capitalize text-white"
+          key={item.label}
+          className="w-full border-b border-b-grayBorder text-base font-semibold capitalize text-white/80"
         >
-          <span>{item.title}</span>
+          <MobileNavItem type="link" navItem={item} />
         </li>
       ))}
     </ul>
